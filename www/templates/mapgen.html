@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Geocoding Map</title>
+    <meta charset="utf-8">
+      <link rel="stylesheet" href="https://mapzen.com/js/mapzen.css">
+      <script src="https://mapzen.com/js/mapzen.min.js"></script>
+    <style>
+      #map {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+    html,body{margin: 0; padding: 0}
+  </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+
+
+
+  navigator.geolocation.watchPosition(render);
+  function render(pos) {
+    //alert("tets");
+      var lat = pos.coords.latitude;
+      var lng = pos.coords.longitude;
+    // alert(lng);
+  }
+
+
+
+
+
+
+
+
+      // Set the global API key
+      L.Mapzen.apiKey = "mapzen-M6Sq5AM";
+
+      // Add a map to the #map div
+      // Center on the Pigott building at Seattle University
+      var map = L.Mapzen.map("map", {
+        center: [47.61033,-122.31801],
+        zoom: 16,
+      });
+
+      // Disable autocomplete and set parameters for the search query
+      var geocoderOptions = {
+        autocomplete: true,
+        params: {
+          sources: 'osm',
+          'boundary.country': 'USA',
+          layers: 'address,venue'
+        }
+      };
+
+      // Add the geocoder to the map, set parameters for geocoder options
+      var geocoder = L.Mapzen.geocoder(geocoderOptions);
+      geocoder.addTo(map);
+
+    </script>
+  </body>
+</html>
